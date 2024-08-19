@@ -1,0 +1,8 @@
+{
+ "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+ "connection.url": "http://odfe-elasticsearch:9200",
+ "topics": "ward_endpoint_messages",
+ "name": "ward_odfe-elasticsearch_connector",
+ "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+ "value.converter.schemas.enable": "false"
+}

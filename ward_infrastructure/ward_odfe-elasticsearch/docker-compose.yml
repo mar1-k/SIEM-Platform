@@ -1,0 +1,33 @@
+---
+version: '2'
+services:
+  open-elastic-search:
+    image: odfe-elasticsearch
+    build:
+      context: .
+      dockerfile: Dockerfile-odfe-elasticsearch
+    ports:
+      - 9200:9200
+      - 9600:9600
+    expose:
+      - "9200"
+    hostname: odfe-elasticsearch
+    container_name: odfe-elasticsearch
+    environment:
+      discovery.type: single-node
+
+  kibana:
+    image: odfe-kibana
+    build:
+      context: .
+      dockerfile: Dockerfile-odfe-kibana
+    container_name: odfe-kibana
+    ports:
+      - 5601:5601
+    expose:
+      - "5601"
+    environment:
+      ELASTICSEARCH_URL: http://odfe-elasticsearch:9200
+      ELASTICSEARCH_HOSTS: http://odfe-elasticsearch:9200
+    volumes:
+      - ./custom-kibana.yml:/usr/share/kibana/config/kibana.yml
